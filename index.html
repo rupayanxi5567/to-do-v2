@@ -287,65 +287,10 @@
     </div>
 
     <script>
-      let buttons = document.querySelectorAll(".button");
-
-      let todo = document.querySelector(".todo");
-
-      let todoH2 = document.querySelector(".todoH2");
-
-      buttons.forEach((el) => {
-        el.addEventListener("click", (e) => {
-          if (e.target.id === "grey") {
-            todo.style.backgroundColor = e.target.id;
-
-            todoH2.style.color = "white";
-            locSave();
-          }
-
-          if (e.target.id === "white") {
-            todo.style.backgroundColor = e.target.id;
-
-            todoH2.style.color = "black";
-            locSave();
-          }
-
-          if (e.target.id === "orange") {
-            todo.style.backgroundColor = e.target.id;
-
-            todoH2.style.color = "white";
-            locSave();
-          }
-
-          if (e.target.id === "purple") {
-            todo.style.backgroundColor = e.target.id;
-            locSave();
-          }
-
-          if (e.target.id === "red") {
-            todo.style.backgroundColor = e.target.id;
-            locSave();
-          }
-
-          if (e.target.id === "lime") {
-            todo.style.backgroundColor = e.target.id;
-            locSave();
-          }
-
-          if (e.target.id === "brown") {
-            todo.style.backgroundColor = e.target.id;
-            locSave();
-          }
-        });
-      });
-
-      let inputBox = document.getElementById("inputBox");
-
-      let clearBtn = document.getElementById("clearBtn");
-
-      let listContainer = document.getElementById("listContainer");
-
       let tc = document.getElementById("tc");
-
+      let inputBox = document.getElementById("inputBox");
+      let clearBtn = document.getElementById("clearBtn");
+      let listContainer = document.getElementById("listContainer");
       let tcArr = [];
 
       let addT = () => {
@@ -371,44 +316,70 @@
           li.appendChild(span);
         }
 
-        locSave();
+        tc.innerHTML = `${tcArr.length}`;
+
+        localSave();
       };
 
       listContainer.addEventListener("click", (e) => {
         if (e.target.tagName === "LI") {
           e.target.classList.toggle("checked");
 
-          locSave();
+          tc.innerHTML = `${tcArr.length}`;
+
+          localSave();
         } else if (e.target.tagName === "SPAN") {
-          e.target.parentElement.remove();
+          e.target.parentElement.remove("li");
+
           tcArr.pop();
           tc.innerHTML = `${tcArr.length}`;
 
-          locSave();
+          localSave();
         }
       });
 
-      let locSave = () => {
+      let localSave = () => {
         localStorage.setItem("data", listContainer.innerHTML);
+
+        tc.innerHTML = `${tcArr.length}`;
       };
 
-      let comeBack = () => {
-        listContainer.innerHTML = localStorage.getItem("data");
+      let getThem = () => {
+        let storing = localStorage.getItem("data");
+
+        if (storing) {
+          listContainer.innerHTML = storing;
+
+          tcArr = Array.from(listContainer.children);
+        }
+
+        tc.innerHTML = `${tcArr.length}`;
       };
 
-      comeBack();
+      getThem();
 
-      clearBtn.addEventListener("click", (e) => {
+      clearBtn.addEventListener("click", () => {
         while (listContainer.firstChild) {
           listContainer.removeChild(listContainer.firstChild);
 
-          tcArr = [];
-
-          tc.innerHTML = "0";
-
-          locSave();
+          tcArr.pop();
+          tc.innerHTML = `${tcArr.length}`;
         }
+
+        localSave();
       });
+
+      // let storedData = localStorage.getItem("data")
+
+      // if (storedData) {
+
+      //   listContainer.innerHTML = storedData
+
+      //   tcArr = Array.from(listContainer.children)
+
+      // }
+
+      //   tc.innerHTML = `${tcArr.length}`
     </script>
   </body>
 </html>
