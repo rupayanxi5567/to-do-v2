@@ -292,6 +292,8 @@
       let clearBtn = document.getElementById("clearBtn");
       let listContainer = document.getElementById("listContainer");
       let tcArr = [];
+      let button = document.querySelectorAll(".button");
+      let todo = document.querySelector(".todo");
 
       let addT = () => {
         if (inputBox.value === "") {
@@ -379,7 +381,34 @@
 
       // }
 
-      //   tc.innerHTML = `${tcArr.length}`
+      //   tc.innerHTML = ${tcArr.length}
+
+      button.forEach((el) => {
+        el.addEventListener("click", (e) => {
+          if (e.target.id === "grey") {
+            todo.style.backgroundColor = e.target.id;
+          }
+
+          if (e.target.id === "white") {
+            todo.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "orange") {
+            todo.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "purple") {
+            todo.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "red") {
+            todo.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "lime") {
+            todo.style.backgroundColor = e.target.id;
+          }
+          if (e.target.id === "brown") {
+            todo.style.backgroundColor = e.target.id;
+          }
+        });
+      });
     </script>
   </body>
 </html>
